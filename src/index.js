@@ -1,20 +1,26 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./index.css";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import ScrollToTop from "./util/ScrollToTop";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import ScrollToTop from './util/ScrollToTop';
+import Home from './containers/Home';
 
-import TemplatePage from "./containers/TemplatePage";
+import TemplatePage from './containers/TemplatePage';
+import Communities from './containers/Communities';
+import AddCommunity from './containers/AddCommunity';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <ScrollToTop>
       <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="templates" element={<TemplatePage />} />
+        <Route path='/' element={<App />}>
+          <Route index element={<Home />} />
+          <Route path='templates' element={<TemplatePage />} />
+          <Route path='communities' element={<Communities />} />
+          <Route path='communities/add' element={<AddCommunity />} />
         </Route>
       </Routes>
     </ScrollToTop>
