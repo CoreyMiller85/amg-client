@@ -30,7 +30,7 @@ const InputComponent = ({
   const [inputContent, setInputContent] = useState('');
 
   return (
-    <Wrapper>
+    <div>
       <StyledLabel>{componentName}: </StyledLabel>
       <StyledInput
         type={type}
@@ -41,7 +41,7 @@ const InputComponent = ({
         autoComplete='off'
         data-lpignore='true'
       />
-    </Wrapper>
+    </div>
   );
 };
 

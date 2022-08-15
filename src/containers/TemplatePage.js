@@ -6,6 +6,16 @@ import BlankTemplate from '../templates/BlankTemplate';
 import SelectMenu from '../components/SelectMenu';
 import PasswordReset from '../templates/PasswordReset';
 import styled from 'styled-components';
+const StyledTemplatePage = styled.div`
+  margin: 1rem;
+`;
+
+const StyledWrapper = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  max-width: 500px;
+`;
+
 const TemplatePage = () => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
@@ -56,11 +66,6 @@ const TemplatePage = () => {
     setSelectedTemplate(e.target.value);
   };
 
-  const communities = [
-    { name: 'Maplecrest', city: 'Charlotte', zip: 28277, state: 'NC' },
-    { name: 'Moss Creek TOA', city: 'Concord', zip: 28277, state: 'NC' },
-  ];
-
   const templateTest = [
     {
       value: 'blank',
@@ -96,20 +101,11 @@ const TemplatePage = () => {
       return;
     }
   });
-  const StyledTemplatePage = styled.div`
-    margin: 1rem;
-  `;
-
-  const StyledWrapper = styled.div`
-    display: flex;
-    flex-flow: row wrap;
-    width: 50%;
-  `;
 
   return (
     <StyledTemplatePage>
       <h1>Template App</h1>
-      <StyledWrapper>
+      <div>
         <SelectMenu
           handleSelected={handleSelected}
           value={selectedTemplate}
@@ -148,7 +144,7 @@ const TemplatePage = () => {
           handleChange={handleIssueChange}
           value={issue}
         />
-      </StyledWrapper>
+      </div>
       {renderTemplate}
 
       <button
