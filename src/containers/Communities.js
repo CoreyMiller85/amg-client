@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import amgDatabase from '../features/api';
 import Community from '../components/Community';
 import AddCommunity from './AddCommunity';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+
+const StyledCommunities = styled.div`
+  margin: 1rem;
+`;
 
 const Communities = () => {
   const [communities, setCommunities] = useState([]);
@@ -14,7 +18,7 @@ const Communities = () => {
 
   const getCommunities = async () => {
     try {
-      const data = await axios.get('https://amgapi.cmiller.net/api/community');
+      const data = await amgDatabase.get('/community');
       setCommunities(data.data);
     } catch (err) {
       console.log(err);
@@ -25,9 +29,6 @@ const Communities = () => {
     return <Community name={name} city={city} state={state} zip={zip} />;
   });
 
-  const StyledCommunities = styled.div`
-    margin: 1rem;
-  `;
   return (
     <StyledCommunities>
       <div>

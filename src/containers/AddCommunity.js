@@ -1,9 +1,12 @@
-import axios from 'axios';
+import amgDatabase from '../features/api';
 import React, { useState } from 'react';
 import InputComponent from '../components/InputComponent';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+const StyledAddCommunity = styled.div`
+  margin: 1rem;
+`;
 const AddCommunity = () => {
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -19,8 +22,8 @@ const AddCommunity = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post('https://amgapi.cmiller.net/api/community/create', data)
+    amgDatabase
+      .post('/community/create', data)
       .then((data) => navigate('/communities', { replace: true }))
       .catch((err) => console.log(err));
   };
@@ -33,10 +36,6 @@ const AddCommunity = () => {
       zip: '',
     });
   };
-
-  const StyledAddCommunity = styled.div`
-    margin: 1rem;
-  `;
 
   return (
     <StyledAddCommunity>
