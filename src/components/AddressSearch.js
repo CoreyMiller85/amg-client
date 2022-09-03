@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import amgapi from '../features/api';
+import { useDispatch } from 'react-redux';
+import { setUnits } from '../features/unitsSlice';
+import { useEffect } from 'react';
+import {
+  setSearchingTrue,
+  setSearchingFalse,
+} from '../features/unitSearchSlice';
 
 const StyledUnitWrapper = styled.div`
   display: flex;
@@ -13,11 +20,22 @@ const StyledUnitWrapper = styled.div`
 
 const AddressSearch = () => {
   const [input, setInput] = useState('');
+  const dispatch = useDispatch();
 
-  const handleAddressSearch = (e) => {
-    const query = e.target.value;
-    setInput(query);
-    axios.get('https://amg.cmiller.net/unit/');
+  useEffect(() => {
+    let getData;
+    if (input) {
+      getData = setTimeout(() => handleAddressSearch(input), 500);
+      dispatch(setSearchingTrue());
+    } else {
+      dispatch(setSearchingFalse());
+    }
+    return () => clearTimeout(getData);
+  }, [input]);
+
+  const handleAddressSearch = async (value) => {
+    const results = await amgapi.get('/unit/?address=' + value);
+    dispatch(setUnits(results.data));
   };
 
   return (
@@ -25,9 +43,7 @@ const AddressSearch = () => {
       <h2>Current Unit: </h2>
       <input
         type='text'
-        onChange={(e) => {
-          handleAddressSearch(e);
-        }}
+        onChange={(e) => setInput(e.target.value)}
         value={input}
       />
     </StyledUnitWrapper>

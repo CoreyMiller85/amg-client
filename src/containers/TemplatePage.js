@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import InputComponent from '../components/InputComponent';
-import TemplateOption from '../components/TemplateOption';
-import WorkOrderUpdate from '../templates/WorkOrderUpdate';
+
 import BlankTemplate from '../templates/BlankTemplate';
 import SelectMenu from '../components/SelectMenu';
 import PasswordReset from '../templates/PasswordReset';
@@ -10,22 +9,16 @@ const StyledTemplatePage = styled.div`
   margin: 1rem;
 `;
 
-const StyledWrapper = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  max-width: 500px;
-`;
-
 const TemplatePage = () => {
   const [name, setName] = useState('');
   const [address, setAddress] = useState('');
   const [community, setCommunity] = useState('');
   const [issue, setIssue] = useState('');
   const [emailContent, setEmailContent] = useState('');
-  const [templates, setTemplates] = useState(['blank', 'password-reset']);
+  const [templates] = useState(['blank', 'password-reset']);
   const [accountNumber, setAccountNumber] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
-  const ref = useRef(null);
+
   const [selectedTemplate, setSelectedTemplate] = useState('blank');
 
   const handleNameChange = (value) => {
@@ -97,9 +90,8 @@ const TemplatePage = () => {
   const renderTemplate = templateTest.map((obj) => {
     if (obj.value === selectedTemplate) {
       return obj.component;
-    } else {
-      return;
     }
+    return null;
   });
 
   return (

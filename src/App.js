@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
-import NavBar from './containers/NavBar';
+
 import './App.css';
 import DefaultLayout from './layout/DefaultLayout';
 
